@@ -21,7 +21,7 @@ class User(Base):
     created_at = Column(DateTime, default=func.now())
 
     workout_progress = relationship("WorkoutProgress", back_populates="user", cascade="all, delete-orphan")
-    nutritional_logs = relationship("NutritionalLog", back_populates="user", cascade="all, delete-orphan")
+    nutritional_logs = relationship("NutritionalLogs", back_populates="user", cascade="all, delete-orphan")
     
 
 
@@ -33,8 +33,6 @@ class WorkoutPlans(Base):
     plan_name = Column(String, nullable=False)
     difficulty_level = Column(String)
     duration = Column(String)
-    exercises = Column(String)
-
     exercises = relationship("WorkoutPlanExercise", back_populates="workout_plan")
     progress = relationship("WorkoutProgress", back_populates="workout_plan")
 
@@ -64,7 +62,7 @@ class WorkoutPlanExercise(Base):
     order = Column(Integer, nullable=True)  # For exercise sequence
     
     # Relationships
-    workout_plan = relationship("WorkoutPlan", back_populates="exercise")
+    workout_plan = relationship("WorkoutPlans", back_populates="exercises")
     exercise = relationship("Exercise", back_populates="workout_plans")
 
 
