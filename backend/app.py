@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from db import engine, Base
 from routes.user import router as user_router
 from routes.workouts import router as workouts_router
+from routes.nutrition import router as nutrition_router
 from models import User, WorkoutPlans, Exercise, WorkoutPlanExercise, WorkoutProgress, NutritionalLogs
 
 
@@ -15,6 +16,7 @@ def read_root():
 
 app.include_router(user_router)
 app.include_router(workouts_router)
+app.include_router(nutrition_router)
 
 
 def create_database():
